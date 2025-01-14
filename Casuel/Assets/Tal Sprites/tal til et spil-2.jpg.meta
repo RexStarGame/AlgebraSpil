@@ -1,0 +1,1419 @@
+fileFormatVersion: 2
+guid: 9780b12461edbd841876f88678904a1a
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 3746185642167981103
+    second: tal til et spil-2_0
+  - first:
+      213: -6106007940606915979
+    second: tal til et spil-2_1
+  - first:
+      213: -7343520235840138241
+    second: tal til et spil-2_2
+  - first:
+      213: 1172434454494177913
+    second: tal til et spil-2_3
+  - first:
+      213: -6516567319852417325
+    second: tal til et spil-2_4
+  - first:
+      213: -4922388245362898951
+    second: tal til et spil-2_5
+  - first:
+      213: -1210250232194516085
+    second: tal til et spil-2_6
+  - first:
+      213: -4267268411427431305
+    second: tal til et spil-2_7
+  - first:
+      213: 6723214398212528651
+    second: tal til et spil-2_8
+  - first:
+      213: 5055695134702666706
+    second: tal til et spil-2_9
+  - first:
+      213: -8525142608417822427
+    second: tal til et spil-2_10
+  - first:
+      213: -8844395785623349227
+    second: tal til et spil-2_11
+  - first:
+      213: -5125191148893276214
+    second: tal til et spil-2_12
+  - first:
+      213: 1021611653003515278
+    second: tal til et spil-2_13
+  - first:
+      213: 1049590304871846948
+    second: tal til et spil-2_14
+  - first:
+      213: -9060568182444344986
+    second: tal til et spil-2_15
+  - first:
+      213: -8974913405856337274
+    second: tal til et spil-2_16
+  - first:
+      213: -1782292671001828537
+    second: tal til et spil-2_17
+  - first:
+      213: 7329241380083826127
+    second: tal til et spil-2_18
+  - first:
+      213: -7877094091102863160
+    second: tal til et spil-2_19
+  - first:
+      213: -345697503653060073
+    second: tal til et spil-2_20
+  - first:
+      213: -6157444662003332885
+    second: tal til et spil-2_21
+  - first:
+      213: 7751345589168685384
+    second: tal til et spil-2_22
+  - first:
+      213: -1171069768617627828
+    second: tal til et spil-2_23
+  - first:
+      213: -4570106338487394738
+    second: tal til et spil-2_24
+  - first:
+      213: 6470613091517272792
+    second: tal til et spil-2_25
+  - first:
+      213: 253955775195367619
+    second: tal til et spil-2_26
+  - first:
+      213: 5279237525985953328
+    second: tal til et spil-2_27
+  - first:
+      213: 2789304541759144903
+    second: tal til et spil-2_28
+  - first:
+      213: -3642757916225741864
+    second: tal til et spil-2_29
+  - first:
+      213: 7674775370741748007
+    second: tal til et spil-2_30
+  - first:
+      213: -4969040310746872508
+    second: tal til et spil-2_31
+  - first:
+      213: 8559125822211562445
+    second: tal til et spil-2_32
+  - first:
+      213: 7778748789099663125
+    second: tal til et spil-2_33
+  - first:
+      213: -6564609393462877026
+    second: tal til et spil-2_34
+  - first:
+      213: -7867066371823422108
+    second: tal til et spil-2_35
+  - first:
+      213: -3277831698444531224
+    second: tal til et spil-2_36
+  - first:
+      213: 8375373351142349521
+    second: tal til et spil-2_37
+  - first:
+      213: 5500037364757133520
+    second: tal til et spil-2_38
+  - first:
+      213: 8666140686001296664
+    second: tal til et spil-2_39
+  - first:
+      213: -2426237491374432947
+    second: tal til et spil-2_40
+  - first:
+      213: -4982910698958571051
+    second: tal til et spil-2_41
+  - first:
+      213: 4927849117083584073
+    second: tal til et spil-2_42
+  - first:
+      213: 7556691404374194744
+    second: tal til et spil-2_43
+  - first:
+      213: 7058926093314047956
+    second: tal til et spil-2_44
+  - first:
+      213: 791343252078760952
+    second: tal til et spil-2_45
+  - first:
+      213: -2100723423522668703
+    second: tal til et spil-2_46
+  - first:
+      213: -4857627468694481046
+    second: tal til et spil-2_47
+  - first:
+      213: -2395769189055151117
+    second: tal til et spil-2_48
+  - first:
+      213: 5717075904938544606
+    second: tal til et spil-2_49
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WindowsStoreApps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: tal til et spil-2_0
+      rect:
+        serializedVersion: 2
+        x: 60
+        y: 814
+        width: 68
+        height: 142
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f2457105eff1df330800000000000000
+      internalID: 3746185642167981103
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tal til et spil-2_1
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 828
+        width: 70
+        height: 68
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 57a0968012a134ba0800000000000000
+      internalID: -6106007940606915979
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tal til et spil-2_2
+      rect:
+        serializedVersion: 2
+        x: 218
+        y: 814
+        width: 68
+        height: 142
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ff31bddc043961a90800000000000000
+      internalID: -7343520235840138241
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tal til et spil-2_3
+      rect:
+        serializedVersion: 2
+        x: 328
+        y: 814
+        width: 106
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 97aed8eace2554010800000000000000
+      internalID: 1172434454494177913
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tal til et spil-2_4
+      rect:
+        serializedVersion: 2
+        x: 460
+        y: 812
+        width: 106
+        height: 146
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3def6418c808095a0800000000000000
+      internalID: -6516567319852417325
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tal til et spil-2_5
+      rect:
+        serializedVersion: 2
+        x: 594
+        y: 814
+        width: 104
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9f7069488f920bbb0800000000000000
+      internalID: -4922388245362898951
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tal til et spil-2_6
+      rect:
+        serializedVersion: 2
+        x: 724
+        y: 812
+        width: 102
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b8b36b473d3543fe0800000000000000
+      internalID: -1210250232194516085
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tal til et spil-2_7
+      rect:
+        serializedVersion: 2
+        x: 854
+        y: 812
+        width: 102
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 77c5f9f1dfd97c4c0800000000000000
+      internalID: -4267268411427431305
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tal til et spil-2_8
+      rect:
+        serializedVersion: 2
+        x: 68
+        y: 732
+        width: 84
+        height: 56
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b0adf32cfd7ad4d50800000000000000
+      internalID: 6723214398212528651
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tal til et spil-2_9
+      rect:
+        serializedVersion: 2
+        x: 198
+        y: 648
+        width: 100
+        height: 140
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2d38f9450ff692640800000000000000
+      internalID: 5055695134702666706
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tal til et spil-2_10
+      rect:
+        serializedVersion: 2
+        x: 324
+        y: 662
+        width: 114
+        height: 116
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 52965bd37fb90b980800000000000000
+      internalID: -8525142608417822427
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tal til et spil-2_11
+      rect:
+        serializedVersion: 2
+        x: 462
+        y: 648
+        width: 104
+        height: 140
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 51855f084e4624580800000000000000
+      internalID: -8844395785623349227
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tal til et spil-2_12
+      rect:
+        serializedVersion: 2
+        x: 594
+        y: 648
+        width: 104
+        height: 138
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ac77d34fdc9afd8b0800000000000000
+      internalID: -5125191148893276214
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tal til et spil-2_13
+      rect:
+        serializedVersion: 2
+        x: 724
+        y: 648
+        width: 102
+        height: 140
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e859cabb26e7d2e00800000000000000
+      internalID: 1021611653003515278
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tal til et spil-2_14
+      rect:
+        serializedVersion: 2
+        x: 856
+        y: 648
+        width: 100
+        height: 140
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 424949142d4e09e00800000000000000
+      internalID: 1049590304871846948
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tal til et spil-2_15
+      rect:
+        serializedVersion: 2
+        x: 206
+        y: 522
+        width: 96
+        height: 102
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 669b2363e35624280800000000000000
+      internalID: -9060568182444344986
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tal til et spil-2_16
+      rect:
+        serializedVersion: 2
+        x: 330
+        y: 520
+        width: 104
+        height: 104
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 682ba0afec3b27380800000000000000
+      internalID: -8974913405856337274
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tal til et spil-2_17
+      rect:
+        serializedVersion: 2
+        x: 504
+        y: 522
+        width: 24
+        height: 102
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 743672b32460447e0800000000000000
+      internalID: -1782292671001828537
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tal til et spil-2_18
+      rect:
+        serializedVersion: 2
+        x: 598
+        y: 520
+        width: 100
+        height: 104
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fcd7df40432b6b560800000000000000
+      internalID: 7329241380083826127
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tal til et spil-2_19
+      rect:
+        serializedVersion: 2
+        x: 764
+        y: 596
+        width: 22
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8c04c75a8a0fea290800000000000000
+      internalID: -7877094091102863160
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tal til et spil-2_20
+      rect:
+        serializedVersion: 2
+        x: 854
+        y: 520
+        width: 102
+        height: 104
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7122507b3f5d33bf0800000000000000
+      internalID: -345697503653060073
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tal til et spil-2_21
+      rect:
+        serializedVersion: 2
+        x: 464
+        y: 560
+        width: 30
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: be88a2514bc5c8aa0800000000000000
+      internalID: -6157444662003332885
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tal til et spil-2_22
+      rect:
+        serializedVersion: 2
+        x: 724
+        y: 562
+        width: 102
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 841c0b5bebf429b60800000000000000
+      internalID: 7751345589168685384
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tal til et spil-2_23
+      rect:
+        serializedVersion: 2
+        x: 764
+        y: 522
+        width: 22
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c4fe85200468fbfe0800000000000000
+      internalID: -1171069768617627828
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tal til et spil-2_24
+      rect:
+        serializedVersion: 2
+        x: 86
+        y: 420
+        width: 26
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e4e92b4af78b390c0800000000000000
+      internalID: -4570106338487394738
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tal til et spil-2_25
+      rect:
+        serializedVersion: 2
+        x: 204
+        y: 378
+        width: 100
+        height: 118
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8d211eee25c3cc950800000000000000
+      internalID: 6470613091517272792
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tal til et spil-2_26
+      rect:
+        serializedVersion: 2
+        x: 330
+        y: 384
+        width: 102
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3c8cd299e6b368300800000000000000
+      internalID: 253955775195367619
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tal til et spil-2_27
+      rect:
+        serializedVersion: 2
+        x: 458
+        y: 444
+        width: 112
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0360e4d2f8e934940800000000000000
+      internalID: 5279237525985953328
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tal til et spil-2_28
+      rect:
+        serializedVersion: 2
+        x: 638
+        y: 458
+        width: 24
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7c300fdc3b995b620800000000000000
+      internalID: 2789304541759144903
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tal til et spil-2_29
+      rect:
+        serializedVersion: 2
+        x: 724
+        y: 378
+        width: 102
+        height: 118
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8db5f90b9f2527dc0800000000000000
+      internalID: -3642757916225741864
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tal til et spil-2_30
+      rect:
+        serializedVersion: 2
+        x: 846
+        y: 438
+        width: 54
+        height: 56
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7219af77987428a60800000000000000
+      internalID: 7674775370741748007
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tal til et spil-2_31
+      rect:
+        serializedVersion: 2
+        x: 460
+        y: 402
+        width: 110
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 445065b1a2c6a0bb0800000000000000
+      internalID: -4969040310746872508
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tal til et spil-2_32
+      rect:
+        serializedVersion: 2
+        x: 598
+        y: 424
+        width: 100
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dcb1bcc469f18c670800000000000000
+      internalID: 8559125822211562445
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tal til et spil-2_33
+      rect:
+        serializedVersion: 2
+        x: 904
+        y: 378
+        width: 54
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 51f09436fcaa3fb60800000000000000
+      internalID: 7778748789099663125
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tal til et spil-2_34
+      rect:
+        serializedVersion: 2
+        x: 638
+        y: 384
+        width: 24
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e94e3759982d5e4a0800000000000000
+      internalID: -6564609393462877026
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tal til et spil-2_35
+      rect:
+        serializedVersion: 2
+        x: 56
+        y: 224
+        width: 90
+        height: 126
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4653b0bf0d092d290800000000000000
+      internalID: -7867066371823422108
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tal til et spil-2_36
+      rect:
+        serializedVersion: 2
+        x: 316
+        y: 224
+        width: 92
+        height: 126
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8e9c2bcdf6dc282d0800000000000000
+      internalID: -3277831698444531224
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tal til et spil-2_37
+      rect:
+        serializedVersion: 2
+        x: 418
+        y: 226
+        width: 90
+        height: 124
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1dadc1030bd4b3470800000000000000
+      internalID: 8375373351142349521
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tal til et spil-2_38
+      rect:
+        serializedVersion: 2
+        x: 518
+        y: 226
+        width: 90
+        height: 124
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0d879b1c7de045c40800000000000000
+      internalID: 5500037364757133520
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tal til et spil-2_39
+      rect:
+        serializedVersion: 2
+        x: 620
+        y: 224
+        width: 88
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 815daaae901544870800000000000000
+      internalID: 8666140686001296664
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tal til et spil-2_40
+      rect:
+        serializedVersion: 2
+        x: 730
+        y: 224
+        width: 88
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d4d54e93bd5445ed0800000000000000
+      internalID: -2426237491374432947
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tal til et spil-2_41
+      rect:
+        serializedVersion: 2
+        x: 844
+        y: 290
+        width: 54
+        height: 58
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5d9b411be1529dab0800000000000000
+      internalID: -4982910698958571051
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tal til et spil-2_42
+      rect:
+        serializedVersion: 2
+        x: 902
+        y: 226
+        width: 56
+        height: 58
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9464d72c9ac336440800000000000000
+      internalID: 4927849117083584073
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tal til et spil-2_43
+      rect:
+        serializedVersion: 2
+        x: 58
+        y: 70
+        width: 62
+        height: 126
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 83ab8f29bc2ced860800000000000000
+      internalID: 7556691404374194744
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tal til et spil-2_44
+      rect:
+        serializedVersion: 2
+        x: 146
+        y: 68
+        width: 92
+        height: 130
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4df38bfc1e756f160800000000000000
+      internalID: 7058926093314047956
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tal til et spil-2_45
+      rect:
+        serializedVersion: 2
+        x: 248
+        y: 70
+        width: 96
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8f39e8bbe7a6bfa00800000000000000
+      internalID: 791343252078760952
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tal til et spil-2_46
+      rect:
+        serializedVersion: 2
+        x: 574
+        y: 120
+        width: 80
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 16fb6992d2bb8d2e0800000000000000
+      internalID: -2100723423522668703
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tal til et spil-2_47
+      rect:
+        serializedVersion: 2
+        x: 676
+        y: 68
+        width: 72
+        height: 130
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a671945dd8d369cb0800000000000000
+      internalID: -4857627468694481046
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tal til et spil-2_48
+      rect:
+        serializedVersion: 2
+        x: 758
+        y: 68
+        width: 92
+        height: 130
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3f3ca8aad9480ced0800000000000000
+      internalID: -2395769189055151117
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tal til et spil-2_49
+      rect:
+        serializedVersion: 2
+        x: 864
+        y: 68
+        width: 94
+        height: 130
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: edd8ec3ce32275f40800000000000000
+      internalID: 5717075904938544606
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable: {}
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
