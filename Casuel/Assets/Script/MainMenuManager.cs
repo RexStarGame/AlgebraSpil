@@ -1,4 +1,6 @@
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MainMenuMagager : MonoBehaviour
 {
@@ -17,5 +19,11 @@ public class MainMenuMagager : MonoBehaviour
     {
         _MainMenu.SetActive(false);
         _LevelSelect.SetActive(true);
+    }
+
+    public void EnterLevel(int level)
+    {
+        SceneManager.LoadScene(level +1);
+
     }
 }
