@@ -1,0 +1,8 @@
+C:/Users/patri/OneDrive/Documents/GitProjecter/AlgebraSpil/Casuel/.utmp/Debug/5z6v1e6f/arm64-v8a/CMakeFiles/edit_cache.dir
+C:/Users/patri/OneDrive/Documents/GitProjecter/AlgebraSpil/Casuel/.utmp/Debug/5z6v1e6f/arm64-v8a/CMakeFiles/rebuild_cache.dir
+C:/Users/patri/OneDrive/Documents/GitProjecter/AlgebraSpil/Casuel/.utmp/Debug/5z6v1e6f/arm64-v8a/GameActivity/CMakeFiles/game.dir
+C:/Users/patri/OneDrive/Documents/GitProjecter/AlgebraSpil/Casuel/.utmp/Debug/5z6v1e6f/arm64-v8a/GameActivity/CMakeFiles/edit_cache.dir
+C:/Users/patri/OneDrive/Documents/GitProjecter/AlgebraSpil/Casuel/.utmp/Debug/5z6v1e6f/arm64-v8a/GameActivity/CMakeFiles/rebuild_cache.dir
+C:/Users/patri/OneDrive/Documents/GitProjecter/AlgebraSpil/Casuel/.utmp/Debug/5z6v1e6f/arm64-v8a/FramePacing/CMakeFiles/swappywrapper.dir
+C:/Users/patri/OneDrive/Documents/GitProjecter/AlgebraSpil/Casuel/.utmp/Debug/5z6v1e6f/arm64-v8a/FramePacing/CMakeFiles/edit_cache.dir
+C:/Users/patri/OneDrive/Documents/GitProjecter/AlgebraSpil/Casuel/.utmp/Debug/5z6v1e6f/arm64-v8a/FramePacing/CMakeFiles/rebuild_cache.dir

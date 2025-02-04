@@ -6,6 +6,10 @@ TagManager:
   tags:
   - Pushable
   - Obstacle
+  - "SpillerensH\xE5nd"
+  - Background
+  - Sprite
+  - Backgrund
   layers:
   - Default
   - TransparentFX
@@ -14,7 +18,7 @@ TagManager:
   - Water
   - UI
   - Player
-  - 
+  - PushableObjects
   - 
   - 
   - 
