@@ -138,7 +138,26 @@ public class PlayerControllerMobile : MonoBehaviour
             isMoving = false; // Stop any attempt to move
             return;
         }
+        if (isPushing && currentPushable != null)
+        {
+            // Objektets nuværende position
+            Vector2 objPos = currentPushable.transform.position;
+            // Objektets potentielle position
+            Vector2 objectTarget = RoundToGrid(objPos + direction * gridSize);
 
+            // Tjek om objektets celle er fri
+            // (Evt. kald: IsCellBlocked(objectTarget, "Pushable") 
+            //  hvis du har speciel logik for pushable)
+            if (IsCellBlocked(objectTarget))
+            {
+                Debug.Log("Objektet er blokeret ⇒ Spiller kan heller ikke bevæge sig.");
+                isMoving = false;
+                return;
+            }
+
+            // Hvis objektet KAN flyttes, gem destinationen til "FixedUpdate"/coroutine
+            // objectTargetPosition = objectTarget; // fx
+        }
         // If the target cell is valid, proceed with movement
         if (IsInsideGrid(potentialTarget))
         {
@@ -256,18 +275,35 @@ public class PlayerControllerMobile : MonoBehaviour
         HandleSwipeMovement();
     }
 
+    private void ResetMovementBools()
+    {
+        animator.SetBool("MoveLeftRight", false);
+        animator.SetBool("MoveUpRight", false);
+        animator.SetBool("MoveUpLeft", false);
+        animator.SetBool("DownRightFeet", false);
+        animator.SetBool("DownLeftFeet", false);
+        animator.SetBool("IsMoving", false);
+    }
+
+    // Klassefelter – placer disse uden for HandleTouch() i din klasse
+
+    private IEnumerator ResetAfterMovement(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        ResetMovementBools();
+        animator.SetTrigger("Idle");
+    }
+
     private void HandleTouch()
     {
-        // Process if there's at least one touch.
         if (Input.touchCount > 0)
         {
-            // Use fully qualified type (optional, if needed):
             UnityEngine.Touch touch = Input.GetTouch(0);
             switch (touch.phase)
             {
                 case TouchPhase.Began:
                     fingerDown = true;
-                    swipeDetected = false; // Reset flag on new touch.
+                    swipeDetected = false;
                     fingerStartTime = Time.time;
                     fingerStartPos = touch.position;
                     break;
@@ -276,39 +312,33 @@ public class PlayerControllerMobile : MonoBehaviour
                     if (fingerDown)
                     {
                         Vector2 swipeDelta = touch.position - fingerStartPos;
-                        // Check if swipe is valid.
                         if (swipeDelta.magnitude >= minSwipeDistance)
                         {
-                            // Before proceeding, only allow movement if we're near the grid center.
                             Vector2 centerPos = RoundToGrid(transform.position);
-                            float tolerance = 0.1f; // Adjust this tolerance as needed.
+                            float tolerance = 0.1f;
                             if (Vector2.Distance(transform.position, centerPos) > tolerance)
                             {
-                                // Not yet landed in the center – ignore swipe.
-                                // Optionally, you might want to reset fingerDown here.
                                 return;
                             }
-
-                            swipeDetected = true; // A valid swipe occurred.
-
-                            // Determine movement direction.
+                            swipeDetected = true;
                             Vector2 direction = Vector2.zero;
+
+                            // Nulstil alle bevægelsesparametre før ny input
+                            ResetMovementBools();
+
                             if (Mathf.Abs(swipeDelta.x) > Mathf.Abs(swipeDelta.y))
                             {
                                 // Horizontal swipe.
                                 direction = (swipeDelta.x > 0) ? Vector2.right : Vector2.left;
                                 Flip(direction);
-
-                                // For horisontal bevægelse sætter vi "MoveLeftRight" til true og udløser Idle.
                                 animator.SetBool("MoveLeftRight", true);
-                                animator.SetTrigger("Idle");
                             }
                             else
                             {
                                 // Vertical swipe.
                                 if (swipeDelta.y > 0)
                                 {
-                                    // Opadgående swipe: toggl mellem "MoveUpRight" og "MoveUpLeft"
+                                    // Opadgående swipe.
                                     direction = Vector2.up;
                                     Flip(direction);
                                     if (lastUpLeft)
@@ -322,14 +352,10 @@ public class PlayerControllerMobile : MonoBehaviour
                                         animator.SetBool("MoveUpRight", false);
                                     }
                                     lastUpLeft = !lastUpLeft;
-                                    // For opadgående bevægelse bruger vi IKKE Idle-trigger,
-                                    // men vi kunne evt. udløse triggeren "UpButNotMoving" efter en kort forsinkelse.
-                                    // Eksempel:
-                                    // animator.SetTrigger("UpButNotMoving");
                                 }
                                 else
                                 {
-                                    // Nedadgående swipe: toggl mellem "DownRightFeet" og "DownLeftFeet"
+                                    // Nedadgående swipe.
                                     direction = Vector2.down;
                                     Flip(direction);
                                     if (lastDownLeft)
@@ -343,36 +369,15 @@ public class PlayerControllerMobile : MonoBehaviour
                                         animator.SetBool("DownRightFeet", false);
                                     }
                                     lastDownLeft = !lastDownLeft;
-                                    // For nedadgående bevægelse udløses Idle-triggeren.
                                     animator.SetTrigger("Idle");
                                 }
                             }
-
-                            // Initiate movement.
                             TryMove(direction);
                             animator.SetBool("IsMoving", true);
 
-                            // Get current grid cell after movement.
                             Vector2 currentGridCell = RoundToGrid(transform.position);
-
-                            if ((swipeDetected || currentGridCell != lastGridCell) && animator.GetBool(""))
-                            {
-                                if (lastLegWasLeft)
-                                {
-                                    // Yderligere kode…
-                                }
-                                else
-                                {
-                                    // Yderligere kode…
-                                }
-
-                                if (!isMoving && animator.GetBool(""))
-                                {
-                                    // Yderligere kode…
-                                }
-
-                                lastGridCell = currentGridCell;
-                            }
+                            // Her kan du tilføje yderligere logik, hvis nødvendigt.
+                            lastGridCell = currentGridCell;
 
                             fingerDown = false;
                         }
@@ -382,20 +387,24 @@ public class PlayerControllerMobile : MonoBehaviour
                 case TouchPhase.Ended:
                 case TouchPhase.Canceled:
                     fingerDown = false;
-                    // If no valid swipe was detected, ensure that the animator remains in Idle state.
                     if (!swipeDetected)
                     {
-                        // evt. nulstil tilstand her.
+                        ResetMovementBools();
+                        animator.SetTrigger("Idle");
+                    }
+                    else
+                    {
+                        StartCoroutine(ResetAfterMovement(0.2f));
                     }
                     break;
             }
         }
         else
         {
-            // If there are no touches, ensure we remain idle.
             fingerDown = false;
         }
     }
+
     private void HandlePushInteraction()
     {
         if (Input.touchCount > 0)
@@ -482,24 +491,21 @@ public class PlayerControllerMobile : MonoBehaviour
     {
         if (isPushing && currentPushable != null)
         {
-            // Handle pushing logic with smooth movement for the player.
+            // Her er push logic, men uden lockedDirection/pushDirection-lås
             HandleSwipeMovement();
 
             if (movement != Vector2.zero)
             {
                 Vector2 targetPos = RoundToGrid((Vector2)transform.position + movement * gridSize);
 
-                if (IsInsideGrid(targetPos)) // Ensure the target cell is not blocked
+                if (IsInsideGrid(targetPos))
                 {
-                    // Smoothly move the player.
                     StartCoroutine(MoveToTarget(rb.position, targetPos, 0.20f));
                     animator.SetBool("IsMoving", true);
 
-                    // Calculate target position for the pushed object.
-                    Vector2 objectTargetPos = RoundToGrid(targetPos + lockedPushDirection * gridSize);
+                    Vector2 objectTargetPos = RoundToGrid(targetPos + pushDirection * gridSize);
 
-                    // Check if pushable movement is allowed.
-                    if (IsInsideGrid(objectTargetPos, false) && !IsCellBlocked(objectTargetPos, "Pushable")) // Allow pushable objects to move freely
+                    if (IsInsideGrid(objectTargetPos, false) && !IsCellBlocked(objectTargetPos, "Pushable"))
                     {
                         StartCoroutine(MovePushableToTarget(currentPushable, currentPushable.transform.position, objectTargetPos, 0.20f));
                         pushPoint.position = objectTargetPos;
@@ -511,42 +517,37 @@ public class PlayerControllerMobile : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log("Blocked movement: Target cell is blocked.");
+                    Debug.Log("Blocked movement: Target cell is blocked or out of grid.");
                 }
-
-                // Reset movement for the next step.
                 movement = Vector2.zero;
             }
         }
         else
         {
-            // Normal movement logic.
             if (isMoving)
             {
                 Vector2 newPosition = Vector2.MoveTowards(rb.position, targetPosition, moveSpeed * Time.fixedDeltaTime);
 
-                // Check if the target position is blocked.
                 if (IsCellBlocked(targetPosition))
                 {
                     Debug.Log("Movement blocked: Target position is occupied.");
-                    isMoving = false; // Stop the movement.
-                    targetPosition = rb.position; // Reset the target position to the current position.
+                    isMoving = false;
+                    targetPosition = rb.position;
                 }
                 else
                 {
                     rb.MovePosition(newPosition);
 
-                    // Check if the player reached the target position.
                     if (Vector2.Distance(rb.position, targetPosition) < 0.01f)
                     {
-                        rb.position = targetPosition; // Snap to the target position.
+                        rb.position = targetPosition;
                         isMoving = false;
                     }
                 }
             }
         }
 
-        // Additional logic for pushable-specific movement rules.
+        // Endnu en push-linje: 
         if (isPushing && currentPushable != null)
         {
             HandleSwipeMovement();
@@ -555,33 +556,30 @@ public class PlayerControllerMobile : MonoBehaviour
             {
                 Vector2 targetPos = RoundToGrid((Vector2)transform.position + movement * gridSize);
 
-                if (IsInsideGrid(targetPos)) // Ensure the target cell is valid for the player.
+                if (IsInsideGrid(targetPos))
                 {
                     rb.MovePosition(targetPos);
+                    Vector2 objectTargetPos = RoundToGrid(targetPos + pushDirection * gridSize);
 
-                    // Move the pushed object as well.
-                    Vector2 objectTargetPos = RoundToGrid(targetPos + lockedPushDirection * gridSize);
-
-                    // Check pushable-specific movement rules.
-                    if (IsInsideGrid(objectTargetPos, false) && !IsCellBlocked(objectTargetPos, "Pushable")) // Allow pushable objects to move freely
+                    if (IsInsideGrid(objectTargetPos, false) && !IsCellBlocked(objectTargetPos, "Pushable"))
                     {
                         currentPushable.transform.position = objectTargetPos;
                         pushPoint.position = objectTargetPos;
                     }
                     else
                     {
-                        Debug.Log("Pushable movement blocked.");
+                        Debug.Log("Pushable movement blocked again.");
                     }
                 }
                 else
                 {
                     Debug.Log("Player movement blocked.");
                 }
-
-                movement = Vector2.zero; // Reset movement for the next frame.
+                movement = Vector2.zero;
             }
         }
     }
+
     // Tilføj disse klassevariable, hvis de ikke allerede findes:
     private void HandleSwipeMovement()
     {
@@ -663,13 +661,8 @@ public class PlayerControllerMobile : MonoBehaviour
                             // Hvis spilleren skubber, lås bevægelsen til den låste retning.
                             if (isPushing && currentPushable != null)
                             {
-                                float dot = Vector2.Dot(direction, lockedPushDirection);
-                                if (dot > 0.1f)
-                                    movement = lockedPushDirection; // Fremad.
-                                else if (dot < -0.1f)
-                                    movement = -lockedPushDirection; // Bagud.
-                                else
-                                    movement = Vector2.zero;
+                                
+                               movement = direction;
                             }
                             else
                             {
@@ -1020,6 +1013,13 @@ public class PlayerControllerMobile : MonoBehaviour
 
     private void InitializeBlockedCells()
     {
+        // 1) Tilføj "BlockEverything" som permanent block
+        GameObject[] blockEverything = GameObject.FindGameObjectsWithTag("BlockEverything");
+        foreach (GameObject blockObj in blockEverything)
+        {
+            Vector2Int coords = WorldToGridCoordinates(blockObj.transform.position);
+            AddToBlockedCells(coords, true); // Altid permanent, så ingen kan rydde det
+        }
         // Add obstacles as permanent blocks
         GameObject[] obstacles = GameObject.FindGameObjectsWithTag("Obstacle");
         foreach (GameObject obstacle in obstacles)
@@ -1054,6 +1054,11 @@ public class PlayerControllerMobile : MonoBehaviour
 
                     // Ensure permanent blocking for obstacles
                     if (col.CompareTag("Obstacle"))
+                    {
+                        AddToBlockedCells(cellCoords, true);
+                    }
+                    // Ensure permanent blocking for "BlockEverything"
+                    else if (col.CompareTag("BlockEverything"))
                     {
                         AddToBlockedCells(cellCoords, true);
                     }
