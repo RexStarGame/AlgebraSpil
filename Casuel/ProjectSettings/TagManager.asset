@@ -10,6 +10,7 @@ TagManager:
   - Background
   - Sprite
   - Backgrund
+  - FxTemporaire
   layers:
   - Default
   - TransparentFX
@@ -46,6 +47,9 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Cloud
+    uniqueID: 2928212117
     locked: 0
   m_RenderingLayers:
   - Default
