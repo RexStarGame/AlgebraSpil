@@ -1,12 +1,12 @@
 # ninja log v5
-77	222	7603363278692133	FramePacing/CMakeFiles/swappywrapper.dir/UnitySwappyWrapper.cpp.o	8385264eedf3f31a
-223	392	7603363280398497	C:/Users/patri/OneDrive/Documents/GitProjecter/AlgebraSpil/Casuel/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/Debug/5z6v1e6f/obj/arm64-v8a/libswappywrapper.so	81a1adfd0e9e17e6
-15	510	7603363281591770	GameActivity/CMakeFiles/game.dir/UGAConfiguration.cpp.o	45912db816165666
-22	513	7603363281596833	GameActivity/CMakeFiles/game.dir/UGAInputKeyEvent.cpp.o	2689dcfdf7969ab9
-8	539	7603363281873043	GameActivity/CMakeFiles/game.dir/UGADebug.cpp.o	f5496cb294db98bd
-64	548	7603363281963371	GameActivity/CMakeFiles/game.dir/UGAInputMotionEvent.cpp.o	34ce51be006027ca
-41	555	7603363281908195	GameActivity/CMakeFiles/game.dir/UGAEntry.cpp.o	9f422866ce75800a
-51	567	7603363282165361	GameActivity/CMakeFiles/game.dir/UGASoftKeyboard.cpp.o	faff974549482eb0
-32	598	7603363282486593	GameActivity/CMakeFiles/game.dir/UGAInput.cpp.o	c4193024c551e21d
-0	605	7603363282476488	GameActivity/CMakeFiles/game.dir/UGAApplication.cpp.o	aef4faf48f01929e
-605	723	7603363283724566	C:/Users/patri/OneDrive/Documents/GitProjecter/AlgebraSpil/Casuel/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/Debug/5z6v1e6f/obj/arm64-v8a/libgame.so	f7f9c28b8a9b7b4d
+389	989	7604623028649483	FramePacing/CMakeFiles/swappywrapper.dir/UnitySwappyWrapper.cpp.o	8385264eedf3f31a
+992	1317	7604623031796688	C:/Users/patri/OneDrive/Documents/GitProjecter/AlgebraSpil/Casuel/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/Debug/5z6v1e6f/obj/arm64-v8a/libswappywrapper.so	81a1adfd0e9e17e6
+2	1576	7604623034449557	GameActivity/CMakeFiles/game.dir/UGADebug.cpp.o	f5496cb294db98bd
+42	1626	7604623034983525	GameActivity/CMakeFiles/game.dir/UGAConfiguration.cpp.o	45912db816165666
+58	1640	7604623035069334	GameActivity/CMakeFiles/game.dir/UGAInputKeyEvent.cpp.o	2689dcfdf7969ab9
+136	1680	7604623035585784	GameActivity/CMakeFiles/game.dir/UGAEntry.cpp.o	9f422866ce75800a
+307	1696	7604623035723649	GameActivity/CMakeFiles/game.dir/UGAInputMotionEvent.cpp.o	34ce51be006027ca
+196	1789	7604623036610552	GameActivity/CMakeFiles/game.dir/UGASoftKeyboard.cpp.o	faff974549482eb0
+22	1819	7604623036955217	GameActivity/CMakeFiles/game.dir/UGAApplication.cpp.o	aef4faf48f01929e
+85	1824	7604623037031474	GameActivity/CMakeFiles/game.dir/UGAInput.cpp.o	c4193024c551e21d
+1824	2029	7604623038986363	C:/Users/patri/OneDrive/Documents/GitProjecter/AlgebraSpil/Casuel/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/Debug/5z6v1e6f/obj/arm64-v8a/libgame.so	f7f9c28b8a9b7b4d
