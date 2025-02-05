@@ -1,257 +1,317 @@
+using CartoonFX;
 using UnityEngine;
-using UnityEngine.SceneManagement; // Til håndtering af levels
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public AudioSource audioSource;
-
     public bool playerEnteredTemple = false;
 
-    public GameObject temple;
-    // Referencer til de objekter, der bruges til ligningen
     [System.Serializable]
-
     public struct SlotAnswerPair
     {
         public GameObject slot;
         public float correctAnswer;
     }
 
-    public SlotAnswerPair[] equalsSlotPairs; // Par af slots og deres korrekte svar for "="
-    public SlotAnswerPair[] questionSlotPairs; // Par af slots og deres korrekte svar for "?"
-    public GameObject winMenu; // Referencer til Win Menu UI
+    [System.Serializable]
+    public struct StringAnswer
+    {
+        public GameObject slot2;
+        public string CorrectString;
+    }
 
-    private SpriteRenderer[] equalsSlotRenderers;
-    private SpriteRenderer[] questionSlotRenderers;
+    // ----------------------------------------------------
+    // Behold disse arrays, som de er
+    [Header("String Svar")]
+    public StringAnswer[] stringAnswers;
+    public StringAnswer[] stringAnswersligemed;
+
+    [Header("Tal Svar")]
+    public SlotAnswerPair[] equalsSlotPairs;
+    public SlotAnswerPair[] questionSlotPairs;
+
+    // ----------------------------------------------------
+    [Header("UI")]
+    public GameObject winMenu;
+
+    // ----------------------------------------------------
+    // Én prefab til "enkelt" rigtige svar
+    // (Du havde før et array "correctAnswersEffects"; nu har du ÉN prefab)
+    [Header("Effekt Prefab til ENKELTE rigtige svar")]
+    public GameObject correctAnswerPrefab;
+
+    // Behold finalAllAnswersEffects uændret
+    [Header("Effekter til NÅR ALLE svar er korrekte")]
+    public CFXR_Effect[] finalAllAnswersEffects;
+
+    private bool hasPlayedFinalEffects = false;
+
+    // Eksempel: spor om stringAnswers[i] var korrekt før
+    private bool[] previouslyCorrectString;
 
     void Start()
     {
-        playerEnteredTemple = false;
-        // Hent SpriteRenderer-komponenter til farveskift
-        equalsSlotRenderers = new SpriteRenderer[equalsSlotPairs.Length];
-        for (int i = 0; i < equalsSlotPairs.Length; i++)
-        {
-            if (equalsSlotPairs[i].slot != null)
-                equalsSlotRenderers[i] = equalsSlotPairs[i].slot.GetComponent<SpriteRenderer>();
-        }
-
-        questionSlotRenderers = new SpriteRenderer[questionSlotPairs.Length];
-        for (int i = 0; i < questionSlotPairs.Length; i++)
-        {
-            if (questionSlotPairs[i].slot != null)
-                questionSlotRenderers[i] = questionSlotPairs[i].slot.GetComponent<SpriteRenderer>();
-        }
-
+        // Skjul WinMenu
         if (winMenu != null)
-            winMenu.SetActive(false); // Sørg for, at Win Menu starter skjult
+            winMenu.SetActive(false);
+
+        // Deaktiver final-effekter
+        if (finalAllAnswersEffects != null)
+        {
+            for (int i = 0; i < finalAllAnswersEffects.Length; i++)
+            {
+                if (finalAllAnswersEffects[i] != null)
+                    finalAllAnswersEffects[i].gameObject.SetActive(false);
+            }
+        }
+
+        // Lav bool-array til stringAnswers
+        previouslyCorrectString = new bool[stringAnswers.Length];
     }
 
     void Update()
     {
-        // Tjek svaret, hvis spilleren placerer et objekt i "=" eller "?" positionerne
-        CheckAnswers();
-        UpdateSlotColors();
+        ValidateAllAnswers();
     }
 
-    private void CheckAnswers()
+    private void ValidateAllAnswers()
     {
         bool allCorrect = true;
 
-        // Tjek alle equalsSlots
-        for (int i = 0; i < equalsSlotPairs.Length; i++)
-        {
-            Collider2D equalsCollider = equalsSlotPairs[i].slot?.GetComponent<Collider2D>();
+        // 1) Tjek stringAnswers -> med "forkert->rigtigt" logik + spawn-effekt
+        allCorrect &= ValidateStringAnswers(stringAnswers);
 
-            if (equalsCollider != null)
-            {
-                GameObject placedObject = GetObjectInSlot(equalsCollider);
-                if (placedObject != null && !placedObject.CompareTag("Player"))
-                {
-                    float placedNumber = GetNumberFromObject(placedObject);
-                    if (placedNumber != -1)
-                    {
-                        if (!Mathf.Approximately(placedNumber, equalsSlotPairs[i].correctAnswer))
-                        {
-                            allCorrect = false;
-                        }
-                    }
-                    else
-                    {
-                        allCorrect = false;
-                    }
-                }
-                else
-                {
-                    allCorrect = false;
-                }
-            }
-        }
+        // 2) Tjek stringAnswersligemed -> ingen effekter
+        if (!ValidateStringAnswersNoEffect(stringAnswersligemed))
+            allCorrect = false;
 
-        // Tjek alle questionSlots
-        for (int i = 0; i < questionSlotPairs.Length; i++)
-        {
-            Collider2D questionCollider = questionSlotPairs[i].slot?.GetComponent<Collider2D>();
+        // 3) Tjek equalsSlotPairs -> ingen "enkelt"-effekt
+        //    men du kan let tilføje samme logik, hvis du vil
+        if (!ValidateNumberAnswersNoEffect(equalsSlotPairs))
+            allCorrect = false;
 
-            if (questionCollider != null)
-            {
-                GameObject placedObject = GetObjectInSlot(questionCollider);
-                if (placedObject != null && !placedObject.CompareTag("Player"))
-                {
-                    float placedNumber = GetNumberFromObject(placedObject);
-                    if (placedNumber != -1)
-                    {
-                        if (!Mathf.Approximately(placedNumber, questionSlotPairs[i].correctAnswer))
-                        {
-                            allCorrect = false;
-                        }
-                    }
-                    else
-                    {
-                        allCorrect = false;
-                    }
-                }
-                else
-                {
-                    allCorrect = false;
-                }
-            }
-        }
+        // 4) Tjek questionSlotPairs -> ingen effekter
+        if (!ValidateNumberAnswersNoEffect(questionSlotPairs))
+            allCorrect = false;
 
-        // Hvis alle svar er korrekte, vis win menu
+        // 5) Hvis alt korrekt -> final effekter
         if (allCorrect)
         {
-
-            audioSource.Play(); // afspillere en lyd når spilleren winner. 
             playerEnteredTemple = true;
-        }
-    }
-    private void OnCollisionEnter2D(Collision2D other)
-    {
-        GameObject temple = other.gameObject;
-
-        if(other.collider.CompareTag("Player") && playerEnteredTemple == true)
-        {
-            ShowWinMenu(); // spillet er 100% complet!
-            playerEnteredTemple = false;
+            PlayFinalEffectsOnce();
         }
     }
 
-    private void UpdateSlotColors()
+    // =============== Validate STRING med "forkert->rigtigt" ===============
+    private bool ValidateStringAnswers(StringAnswer[] answers)
     {
-        // Opdater farver for equalsSlots
-        for (int i = 0; i < equalsSlotPairs.Length; i++)
-        {
-            Collider2D equalsCollider = equalsSlotPairs[i].slot?.GetComponent<Collider2D>();
+        bool localAll = true;
 
-            if (equalsCollider != null)
+        for (int i = 0; i < answers.Length; i++)
+        {
+            if (answers[i].slot2 == null)
             {
-                GameObject placedObject = GetObjectInSlot(equalsCollider);
-                if (placedObject != null && !placedObject.CompareTag("Player"))
+                localAll = false;
+                previouslyCorrectString[i] = false;
+                continue;
+            }
+
+            var coll = answers[i].slot2.GetComponent<Collider2D>();
+            if (coll == null)
+            {
+                localAll = false;
+                previouslyCorrectString[i] = false;
+                continue;
+            }
+
+            GameObject placedObj = GetObjectInSlot(coll);
+            if (placedObj == null || placedObj.CompareTag("Player"))
+            {
+                localAll = false;
+                previouslyCorrectString[i] = false;
+                continue;
+            }
+
+            string text = GetStringFromObject(placedObj);
+            bool isCorrectNow = (text == answers[i].CorrectString);
+
+            if (isCorrectNow)
+            {
+                // Tjek om den IKKE var korrekt før
+                if (!previouslyCorrectString[i])
                 {
-                    float placedNumber = GetNumberFromObject(placedObject);
-                    if (placedNumber != -1 && Mathf.Approximately(placedNumber, equalsSlotPairs[i].correctAnswer))
-                    {
-                        if (equalsSlotRenderers[i] != null)
-                            equalsSlotRenderers[i].color = Color.green;
-                    }
-                    else
-                    {
-                        if (equalsSlotRenderers[i] != null)
-                            equalsSlotRenderers[i].color = Color.red;
-                    }
+                    // Spawn effekt (1 prefab) ved brikkens position
+                    ShowCorrectAnswerEffect(placedObj.transform.position);
+
+                    // Marker at nu er den korrekt
+                    previouslyCorrectString[i] = true;
                 }
-                else
-                {
-                    if (equalsSlotRenderers[i] != null)
-                        equalsSlotRenderers[i].color = Color.red;
-                }
+            }
+            else
+            {
+                localAll = false;
+                previouslyCorrectString[i] = false;
             }
         }
 
-        // Opdater farver for questionSlots
-        for (int i = 0; i < questionSlotPairs.Length; i++)
-        {
-            Collider2D questionCollider = questionSlotPairs[i].slot?.GetComponent<Collider2D>();
+        return localAll;
+    }
 
-            if (questionCollider != null)
+    // =============== Validate STRING-ligemed ingen effekter ===============
+    private bool ValidateStringAnswersNoEffect(StringAnswer[] answers)
+    {
+        bool all = true;
+        foreach (var ans in answers)
+        {
+            if (ans.slot2 == null)
             {
-                GameObject placedObject = GetObjectInSlot(questionCollider);
-                if (placedObject != null && !placedObject.CompareTag("Player"))
-                {
-                    float placedNumber = GetNumberFromObject(placedObject);
-                    if (placedNumber != -1 && Mathf.Approximately(placedNumber, questionSlotPairs[i].correctAnswer))
-                    {
-                        if (questionSlotRenderers[i] != null)
-                            questionSlotRenderers[i].color = Color.green;
-                    }
-                    else
-                    {
-                        if (questionSlotRenderers[i] != null)
-                            questionSlotRenderers[i].color = Color.red;
-                    }
-                }
-                else
-                {
-                    if (questionSlotRenderers[i] != null)
-                        questionSlotRenderers[i].color = Color.red;
-                }
+                all = false;
+                continue;
             }
+
+            var coll = ans.slot2.GetComponent<Collider2D>();
+            if (coll == null)
+            {
+                all = false;
+                continue;
+            }
+
+            GameObject placedObj = GetObjectInSlot(coll);
+            if (placedObj == null || placedObj.CompareTag("Player"))
+            {
+                all = false;
+                continue;
+            }
+
+            string text = GetStringFromObject(placedObj);
+            if (text != ans.CorrectString)
+                all = false;
+        }
+        return all;
+    }
+
+    // =============== Validate NUMBER-ligemed ingen effekter ===============
+    private bool ValidateNumberAnswersNoEffect(SlotAnswerPair[] pairs)
+    {
+        bool all = true;
+        foreach (var pair in pairs)
+        {
+            if (pair.slot == null)
+            {
+                all = false;
+                continue;
+            }
+            var coll = pair.slot.GetComponent<Collider2D>();
+            if (coll == null)
+            {
+                all = false;
+                continue;
+            }
+
+            GameObject placedObj = GetObjectInSlot(coll);
+            if (placedObj == null || placedObj.CompareTag("Player"))
+            {
+                all = false;
+                continue;
+            }
+
+            float num = GetNumberFromObject(placedObj);
+            if (!Mathf.Approximately(num, pair.correctAnswer))
+                all = false;
+        }
+        return all;
+    }
+
+    // =============== Spawn "rigtig svar" effekt ved en position ===============
+    private void ShowCorrectAnswerEffect(Vector3 spawnPos)
+    {
+        // Tjek om du har sat correctAnswerPrefab i Inspector
+        if (correctAnswerPrefab == null)
+        {
+            Debug.LogWarning("correctAnswerPrefab er ikke sat! Ingen effekt at vise.");
+            return;
+        }
+
+        // Lav en HELT NY instans af effekten i scenen
+        Instantiate(correctAnswerPrefab, spawnPos, Quaternion.identity);
+    }
+
+    // =============== final effekter ===============
+    private void PlayFinalEffectsOnce()
+    {
+        if (hasPlayedFinalEffects) return;
+        hasPlayedFinalEffects = true;
+
+        if (finalAllAnswersEffects == null) return;
+
+        foreach (var fx in finalAllAnswersEffects)
+        {
+            if (fx == null) continue;
+
+            fx.gameObject.SetActive(true);
+
+            ParticleSystem ps = fx.GetComponent<ParticleSystem>();
+            if (ps != null)
+            {
+                ps.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+                ps.Play();
+            }
+            fx.ResetState();
         }
     }
 
+    // =============== Hjælpemetoder ===============
     private GameObject GetObjectInSlot(Collider2D slot)
     {
-        // Tjek for objekter, der overlapper med denne slot
-        Collider2D[] results = new Collider2D[10];
-        ContactFilter2D filter = new ContactFilter2D().NoFilter();
-        int count = slot.Overlap(filter, results);
+        if (slot == null) return null;
 
-        if (count > 0)
+        Collider2D[] results = new Collider2D[10];
+        slot.Overlap(new ContactFilter2D().NoFilter(), results);
+
+        foreach (var r in results)
         {
-            foreach (var result in results)
-            {
-                if (result != null && !result.CompareTag("Player"))
-                {
-                    return result.gameObject; // Returner det første overlappende objekt, der ikke er spilleren
-                }
-            }
+            if (r != null && r.gameObject != null && !r.CompareTag("Player"))
+                return r.gameObject;
         }
         return null;
     }
 
     private float GetNumberFromObject(GameObject obj)
     {
-        // Tjek først, om objektet har NumberObject
         if (obj == null) return -1;
+        NumberObject numberObj = obj.GetComponent<NumberObject>();
+        if (numberObj != null)
+            return numberObj.value;
 
-        NumberObject numberObject = obj.GetComponent<NumberObject>();
-        if (numberObject != null)
-        {
-            return numberObject.value; // Returner værdien fra NumberObject
-        }
-
-        //Debug.LogWarning($"Objektet '{obj.name}' har ikke et NumberObject script!");
         return -1;
     }
 
-    private void ShowWinMenu()
+    private string GetStringFromObject(GameObject obj)
+    {
+        if (obj == null) return null;
+
+        StringVariabler strv = obj.GetComponent<StringVariabler>();
+        return strv?.textValue;
+    }
+
+    // ================== kollision med Temple ====================
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Player") && playerEnteredTemple)
+        {
+            ShowWinMenu();
+            playerEnteredTemple = false;
+        }
+    }
+
+    public void ShowWinMenu()
     {
         if (winMenu != null)
-        {
-            winMenu.SetActive(true); // Vis Win Menu
-        }
+            winMenu.SetActive(true);
     }
 
     public void RestartLevel()
     {
-        // Genindlæs det aktuelle level
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-    }
-
-    public void LoadNextLevel()
-    {
-        // NOTE: Tilføj det næste level til build-indstillingerne og kald det her
-        // SceneManager.LoadScene("NextLevelSceneName");
-        Debug.Log("Load næste level");
     }
 }

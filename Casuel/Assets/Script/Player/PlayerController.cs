@@ -11,7 +11,9 @@ public class PlayerControllerMobile : MonoBehaviour
     public Vector2 gridOrigin = Vector2.zero;  // Startpunktet for gitteret
     public int gridWidth = 10; // Antal celler i bredden
     public int gridHeight = 10; // Antal celler i højden
+    private bool lastUpLeft = true;
 
+    private bool lastDownLeft = true;
     [Header("Swipe Settings")]
     public float minSwipeDistance = 50f; // Minimum pixelafstand for at registrere et swipe
 
@@ -64,7 +66,8 @@ public class PlayerControllerMobile : MonoBehaviour
     private Vector2 fingerStartPos;
     // Gemmer originalt materiale, så highlight kan nulstilles
     private Material originalMaterial;
-
+    [Header("Grid Settings")]
+    public CameraFollow2D cameraController;
     // Data til blokering af celler i grid
     [System.Serializable]
     public class GridCell
@@ -74,9 +77,18 @@ public class PlayerControllerMobile : MonoBehaviour
         public bool isPermanent;
     }
     public List<GridCell> blockedCells = new List<GridCell>();
+    public void ExpandGrid(Vector2 newOrigin, int newWidth, int newHeight)
+    {
+        // Kald denne metode når griddet udvides
+        if (cameraController != null)
+        {
+            cameraController.UpdateGridBounds(newOrigin, newWidth, newHeight);
+        }
 
+        // Tilføj din grid-udvidelseslogik her
+    }
     // Tilføj disse private variabler i klassen
-  
+
     private float fingerUpTime;
     private Vector2 fingerUpPos;
     private Vector2 swipeStartPos;
@@ -244,7 +256,7 @@ public class PlayerControllerMobile : MonoBehaviour
         HandleSwipeMovement();
     }
 
-    private void HandleTouch() 
+    private void HandleTouch()
     {
         // Process if there's at least one touch.
         if (Input.touchCount > 0)
@@ -286,12 +298,54 @@ public class PlayerControllerMobile : MonoBehaviour
                                 // Horizontal swipe.
                                 direction = (swipeDelta.x > 0) ? Vector2.right : Vector2.left;
                                 Flip(direction);
+
+                                // For horisontal bevægelse sætter vi "MoveLeftRight" til true og udløser Idle.
+                                animator.SetBool("MoveLeftRight", true);
+                                animator.SetTrigger("Idle");
                             }
                             else
                             {
                                 // Vertical swipe.
-                                direction = (swipeDelta.y > 0) ? Vector2.up : Vector2.down;
-                                Flip(direction);
+                                if (swipeDelta.y > 0)
+                                {
+                                    // Opadgående swipe: toggl mellem "MoveUpRight" og "MoveUpLeft"
+                                    direction = Vector2.up;
+                                    Flip(direction);
+                                    if (lastUpLeft)
+                                    {
+                                        animator.SetBool("MoveUpRight", true);
+                                        animator.SetBool("MoveUpLeft", false);
+                                    }
+                                    else
+                                    {
+                                        animator.SetBool("MoveUpLeft", true);
+                                        animator.SetBool("MoveUpRight", false);
+                                    }
+                                    lastUpLeft = !lastUpLeft;
+                                    // For opadgående bevægelse bruger vi IKKE Idle-trigger,
+                                    // men vi kunne evt. udløse triggeren "UpButNotMoving" efter en kort forsinkelse.
+                                    // Eksempel:
+                                    // animator.SetTrigger("UpButNotMoving");
+                                }
+                                else
+                                {
+                                    // Nedadgående swipe: toggl mellem "DownRightFeet" og "DownLeftFeet"
+                                    direction = Vector2.down;
+                                    Flip(direction);
+                                    if (lastDownLeft)
+                                    {
+                                        animator.SetBool("DownRightFeet", true);
+                                        animator.SetBool("DownLeftFeet", false);
+                                    }
+                                    else
+                                    {
+                                        animator.SetBool("DownLeftFeet", true);
+                                        animator.SetBool("DownRightFeet", false);
+                                    }
+                                    lastDownLeft = !lastDownLeft;
+                                    // For nedadgående bevægelse udløses Idle-triggeren.
+                                    animator.SetTrigger("Idle");
+                                }
                             }
 
                             // Initiate movement.
@@ -300,32 +354,26 @@ public class PlayerControllerMobile : MonoBehaviour
 
                             // Get current grid cell after movement.
                             Vector2 currentGridCell = RoundToGrid(transform.position);
-                            // Check if we need to alternate leg animation:
-                            // Either a valid swipe occurred, OR the player’s grid cell has changed.
-                            if ((swipeDetected || currentGridCell != lastGridCell) && animator.GetBool("IsMoving"))
+
+                            if ((swipeDetected || currentGridCell != lastGridCell) && animator.GetBool(""))
                             {
                                 if (lastLegWasLeft)
                                 {
-                                    animator.ResetTrigger("MoveRightLeg");
-                                    animator.SetTrigger("MoveRightLeg");
-                                    lastLegWasLeft = false;
+                                    // Yderligere kode…
                                 }
                                 else
                                 {
-                                    animator.ResetTrigger("MoveLeftLeg");
-                                    animator.SetTrigger("MoveLeftLeg");
-                                    lastLegWasLeft = true;
+                                    // Yderligere kode…
                                 }
-                                // Optionally, if movement is complete, reset IsMoving.
-                                if (!isMoving && animator.GetBool("IsMoving"))
+
+                                if (!isMoving && animator.GetBool(""))
                                 {
-                                    animator.SetBool("IsMoving", false);
+                                    // Yderligere kode…
                                 }
-                                // Update the lastGridCell to the current one.
+
                                 lastGridCell = currentGridCell;
                             }
 
-                            // Since we handled a valid swipe, stop further processing for this touch.
                             fingerDown = false;
                         }
                     }
@@ -337,7 +385,7 @@ public class PlayerControllerMobile : MonoBehaviour
                     // If no valid swipe was detected, ensure that the animator remains in Idle state.
                     if (!swipeDetected)
                     {
-                        animator.SetBool("IsMoving", false);
+                        // evt. nulstil tilstand her.
                     }
                     break;
             }
@@ -346,7 +394,6 @@ public class PlayerControllerMobile : MonoBehaviour
         {
             // If there are no touches, ensure we remain idle.
             fingerDown = false;
-            animator.SetBool("IsMoving", false);
         }
     }
     private void HandlePushInteraction()
@@ -557,11 +604,11 @@ public class PlayerControllerMobile : MonoBehaviour
             switch (touch.phase)
             {
                 case TouchPhase.Began:
-                    // Tjek om vi er i input-buffer (cooldown).
+                    //Tjek om vi er i input-buffer (cooldown).
                     if (Time.time - lastSwipeTime < swipeCooldown)
                         return;
                     fingerDown = true;
-                    swipeDetected = false; // Reset flag på nyt touch.
+                    swipeDetected = false;// Reset flag på nyt touch.
                     fingerStartTime = Time.time;
                     fingerStartPos = touch.position;
                     Debug.Log($"Swipe start position: {fingerStartPos}");
@@ -583,8 +630,8 @@ public class PlayerControllerMobile : MonoBehaviour
                         if (finalSwipeDirection.magnitude >= adaptiveMinSwipe || swipeDuration < swipeDurationThreshold)
                         {
                             lastSwipeTime = Time.time; // Start cooldown.
-                            swipeDetected = true;       // Gyldigt swipe.
-                            fingerDown = false;         // Nulstil flag med det samme.
+                            swipeDetected = true; // Gyldigt swipe.
+                            fingerDown = false;// Nulstil flag med det samme.
 
                             // Haptisk feedback – giv en kort vibration.
                             Handheld.Vibrate();
@@ -594,10 +641,23 @@ public class PlayerControllerMobile : MonoBehaviour
                             if (Mathf.Abs(finalSwipeDirection.x) > Mathf.Abs(finalSwipeDirection.y))
                             {
                                 direction = finalSwipeDirection.x > 0 ? Vector2.right : Vector2.left;
+                                
+                               
+
+                                animator.SetBool("Right", true); // push animation højer
+                                animator.SetBool("Up", false); // push animation up
+                                animator.SetBool("down", false); // push animation down
+                                animator.SetBool("left", false); // push animation venstre
+
                             }
                             else
                             {
                                 direction = finalSwipeDirection.y > 0 ? Vector2.up : Vector2.down;
+
+                                animator.SetBool("Right", false);
+                                animator.SetBool("Up", true);
+                                animator.SetBool("down", false);
+                                animator.SetBool("left", false);
                             }
 
                             // Hvis spilleren skubber, lås bevægelsen til den låste retning.
