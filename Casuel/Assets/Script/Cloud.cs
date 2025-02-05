@@ -4,12 +4,13 @@ public class Cloud : MonoBehaviour
 {
     public float speed;
     public int xDirection;
-    public int bounds;
+    public float bounds;
+    public float boundsMinus;
 
     void Update()
     {
         transform.Translate(xDirection * speed * Time.deltaTime, 0, 0);
-        if (transform.position.x < -bounds || transform.position.x > bounds)
+        if (transform.position.x < boundsMinus || transform.position.x > bounds)
         {
             Destroy(gameObject);
         }
