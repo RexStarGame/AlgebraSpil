@@ -14,7 +14,7 @@ public class PlayerAnimator : MonoBehaviour
     private bool rightLeg;
     private float playerX;
     private float playerY;
-    private Transform player;
+    [SerializeField] private Transform player;
     private SpriteRenderer spriteRenderer;
 
     public bool directionLocked;
@@ -22,13 +22,14 @@ public class PlayerAnimator : MonoBehaviour
     private void Start()
     {
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
-        player = GetComponentInParent<Transform>();
         spriteRenderer.sprite = front[0];
         lastDirection = "Front";
+
     }
 
     private void Update()
     {
+        transform.position = player.position;
 
         if (playerX < player.position.x)
         {
@@ -55,6 +56,22 @@ public class PlayerAnimator : MonoBehaviour
 
     }
 
+    public void TurnLeft()
+    {
+        lastDirection = "Left";
+    }
+    public void TurnRight()
+    {
+        lastDirection = "Right";
+    }
+    public void TurnFront()
+    {
+        lastDirection = "Front";
+    }
+    public void TurnBack()
+    {
+        lastDirection = "Back";
+    }
     private void Animate(string direction, bool isMoving, bool directionLocked)
     {
 
