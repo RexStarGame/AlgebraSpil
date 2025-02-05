@@ -23,7 +23,7 @@ public class MainMenuMagager : MonoBehaviour
 
     public void EnterLevel(int level)
     {
-        SceneManager.LoadScene(level +1);
+        SceneManager.LoadScene(level);
 
     }
 }
