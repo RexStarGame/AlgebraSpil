@@ -58,19 +58,27 @@ public class PlayerAnimator : MonoBehaviour
 
     public void TurnLeft()
     {
+        if (directionLocked) return;
         lastDirection = "Left";
+        Animate(lastDirection, false, directionLocked);
     }
     public void TurnRight()
     {
+        if (directionLocked) return;
         lastDirection = "Right";
+        Animate(lastDirection, false, directionLocked);
     }
     public void TurnFront()
     {
+        if (directionLocked) return;
         lastDirection = "Front";
+        Animate(lastDirection, false, directionLocked);
     }
     public void TurnBack()
     {
+        if (directionLocked) return;
         lastDirection = "Back";
+        Animate(lastDirection, false, directionLocked);
     }
     private void Animate(string direction, bool isMoving, bool directionLocked)
     {
