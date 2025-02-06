@@ -2,6 +2,10 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
 using System.Collections;
+using static UnityEngine.UI.Image;
+using Unity.VisualScripting;
+using Unity.Hierarchy;
+using UnityEditor.Experimental.GraphView;
 
 public class PlayerControllerMobile : MonoBehaviour
 {
@@ -35,7 +39,11 @@ public class PlayerControllerMobile : MonoBehaviour
     private Vector2 pushDirection; // Retningen, der skubbes i
     private Vector2 lockedDirection; // Låst retning til rotation/animation
     private Vector2 lockedPushDirection = Vector2.zero; // Låser bevægelse til skubberetning
-
+    [SerializeField] private Transform pushRayOriginLeft;
+    [SerializeField] private Transform pushRayOriginRight;
+    [SerializeField] private Transform pushRayOriginTop;
+    //[SerializeField] private Transform pushRayOriginBottom;
+    
     // Swipe-input
     private Vector2 startTouchPos;
     private Vector2 endTouchPos;
@@ -61,6 +69,11 @@ public class PlayerControllerMobile : MonoBehaviour
     // Private variabler til swipe-håndtering.
     private float lastSwipeTime = 0f;
     private bool fingerDown = false;
+
+    public bool canMoveRight = true;
+    public bool canMoveLeft = true;
+    public bool canMoveDown = true;
+    public bool canMoveUp = true;
 
     private float fingerStartTime;
     private Vector2 fingerStartPos;
@@ -117,6 +130,7 @@ public class PlayerControllerMobile : MonoBehaviour
     [Header("Debug Settings")]
     public bool showDebugGizmos = true; // Toggle debug visualizations
 
+    private GameObject playerAnimation;
 
     // ***** Add this missing variable *****
     private Vector2 lastGridCell;
@@ -154,7 +168,14 @@ public class PlayerControllerMobile : MonoBehaviour
                 isMoving = false;
                 return;
             }
-
+            /*
+            if (movementIsValid)
+            {
+                targetPosition = ...;
+                isMoving = true;
+                return true;
+            }
+            */
             // Hvis objektet KAN flyttes, gem destinationen til "FixedUpdate"/coroutine
             // objectTargetPosition = objectTarget; // fx
         }
@@ -163,6 +184,7 @@ public class PlayerControllerMobile : MonoBehaviour
         {
             targetPosition = potentialTarget;
             isMoving = true;
+
         }
         else
         {
@@ -171,6 +193,8 @@ public class PlayerControllerMobile : MonoBehaviour
     }
     void Start()
     {
+        playerAnimation = GameObject.Find("PlayerGraphic");
+
         InitializeBlockedCells(); // Din eksisterende initialisering
         CacheBackgrounds();
         ProcessAllBackgrounds();
@@ -200,6 +224,163 @@ public class PlayerControllerMobile : MonoBehaviour
     }
     void Update()
     {
+
+        if (IsPushing && currentPushable != null)
+        {
+            float rayDistance = 0.25f;      // How far to check for obstacles
+
+            LayerMask obstacleMask = LayerMask.GetMask("PushableObjects");
+            string pushableTag = "Pushable";
+
+            Vector2 upOrigin = pushRayOriginTop.position;
+            
+            // Calculate ray origins
+            Vector2 rightOrigin = pushRayOriginRight.position;
+
+            Vector2 leftOrigin = pushRayOriginLeft.position;
+            RaycastHit2D upHit = Physics2D.Raycast(upOrigin, pushRayOriginTop.right,
+                rayDistance, obstacleMask);
+            
+               
+            // Cast rays in both directions
+            RaycastHit2D rightHit = Physics2D.Raycast(rightOrigin, pushRayOriginRight.right,
+                                    rayDistance, obstacleMask);
+
+            RaycastHit2D leftHit = Physics2D.Raycast(leftOrigin, -pushRayOriginLeft.right,
+                                   rayDistance, obstacleMask);
+            float tempDirection = Mathf.RoundToInt(transform.rotation.eulerAngles.z);
+
+          
+
+            // Debug visualization
+
+            // Check left side
+            if (leftHit.collider != null &&
+                (leftHit.collider.CompareTag(pushableTag) ||
+                 leftHit.collider.gameObject.CompareTag("Wall")))
+            {
+                if (tempDirection == 0) // up
+                {
+                    
+                    DisablelMovementleft();
+                }
+                else if (tempDirection == 270) // right
+                {
+                    DisablelMovementUp();
+                }
+                else if (tempDirection == 90) // left
+                {
+                    DisablelMovementDown();
+                }
+                else if(tempDirection == 180) // down
+                {
+                    DisablelMovementRight();
+                }
+            }
+            else
+            {
+                if (tempDirection == 0) // up
+                {
+                    EnableMovementLeft();
+                }
+                else if (tempDirection == 270) // right
+                {
+                    EnableMovementUp();
+                }
+                else if (tempDirection == 90) // left
+                {
+                    EnableMovementDown();
+
+                }
+                else if (tempDirection == 180) // down
+                {
+                    EnableMovementRight();
+                }
+            }
+            if (rightHit.collider != null &&
+                (rightHit.collider.CompareTag(pushableTag) ||
+                 rightHit.collider.gameObject.CompareTag("Wall")))
+            {
+                if (tempDirection == 0) // up
+                {
+                    DisablelMovementRight();
+                }
+                else if (tempDirection == 270) // right
+                {
+                    DisablelMovementDown();
+                }
+                else if (tempDirection == 90) // left
+                {
+                    DisablelMovementUp();
+                }
+                else if (tempDirection == 180) // down
+                {
+                    DisablelMovementleft();
+                }
+            }
+            else
+            {
+                if (tempDirection == 0) // up
+                {
+                    EnableMovementRight();
+                }
+                else if (tempDirection == 270) // right
+                {
+                    EnableMovementDown();
+                }
+                else if (tempDirection == 90) // left
+                {
+                    EnableMovementUp();
+
+                }
+                else if (tempDirection == 180) // down
+                {
+                    EnableMovementLeft();
+                }
+            }
+            if (upHit.collider != null &&
+                (upHit.collider.CompareTag(pushableTag) ||
+                 upHit.collider.gameObject.CompareTag("Wall")))
+            {
+                if (tempDirection == 0) // up
+                {
+                    DisablelMovementUp();
+                }
+                else if (tempDirection == 270) // right
+                {
+                    DisablelMovementRight();
+                }
+                else if (tempDirection == 90) // left
+                {
+                    DisablelMovementleft();
+                }
+                else if (tempDirection == 180) // down
+                {
+                    DisablelMovementDown();
+                }
+            }
+            else
+            {
+                if (tempDirection == 0) // up
+                {
+                    EnableMovementUp();
+                }
+                else if (tempDirection == 270) // right
+                {
+                    EnableMovementRight();
+                }
+                else if (tempDirection == 90) // left
+                {
+                    EnableMovementLeft();
+
+                }
+                else if (tempDirection == 180) // down
+                {
+                    EnableMovementDown();
+                }
+            }
+        }
+
         if (Input.touchCount == 1)
         {
             UnityEngine.Touch touch = Input.GetTouch(0);
@@ -579,37 +760,38 @@ public class PlayerControllerMobile : MonoBehaviour
             }
         }
     }
-
+    private void UpdateAnimatorBools(Vector2 direction)
+    {
+        animator.SetBool("Right", direction == Vector2.right);
+        animator.SetBool("Left", direction == Vector2.left);
+        animator.SetBool("Up", direction == Vector2.up);
+        animator.SetBool("Down", direction == Vector2.down);
+    }
     // Tilføj disse klassevariable, hvis de ikke allerede findes:
     private void HandleSwipeMovement()
     {
-        // Beregn den adaptive swipe-tærskel baseret på skærmbredden.
+        // Calculate adaptive swipe threshold based on screen width
         float adaptiveMinSwipe = Screen.width * adaptiveSwipePercentage;
 
-        // Process if there's at least one touch.
         if (Input.touchCount > 0)
         {
-            UnityEngine.Touch touch = Input.GetTouch(0);
+            Touch touch = Input.GetTouch(0);
 
-            // Først: tjek om touch-positionen rammer et objekt, som skal ignoreres.
+            // Check if touch hits ignored layers
             Vector2 worldTouchPos = Camera.main.ScreenToWorldPoint(touch.position);
             if (Physics2D.OverlapPoint(worldTouchPos, swipeIgnoreLayers) != null)
             {
-                // Hvis touch rammer et objekt på et ignoreret lag, returner uden at processere.
                 return;
             }
 
             switch (touch.phase)
             {
                 case TouchPhase.Began:
-                    //Tjek om vi er i input-buffer (cooldown).
-                    if (Time.time - lastSwipeTime < swipeCooldown)
-                        return;
+                    if (Time.time - lastSwipeTime < swipeCooldown) return;
                     fingerDown = true;
-                    swipeDetected = false;// Reset flag på nyt touch.
+                    swipeDetected = false;
                     fingerStartTime = Time.time;
                     fingerStartPos = touch.position;
-                    Debug.Log($"Swipe start position: {fingerStartPos}");
                     break;
 
                 case TouchPhase.Moved:
@@ -618,67 +800,57 @@ public class PlayerControllerMobile : MonoBehaviour
                         Vector2 currentTouchPos = touch.position;
                         Vector2 swipeDelta = currentTouchPos - fingerStartPos;
 
-                        // Smooth swipeDelta med Lerp – brug smoothingFactor.
-                        Vector2 finalSwipeDirection = Vector2.Lerp(swipeDelta, swipeDelta.normalized * adaptiveMinSwipe, smoothingFactor);
+                        Vector2 finalSwipeDirection = Vector2.Lerp(swipeDelta,
+                            swipeDelta.normalized * adaptiveMinSwipe, smoothingFactor);
 
-                        // Beregn swipe-varigheden.
                         float swipeDuration = Time.time - fingerStartTime;
 
-                        // Tjek om den glatte swipe er lang nok, ELLER om swipe-varigheden er meget kort.
-                        if (finalSwipeDirection.magnitude >= adaptiveMinSwipe || swipeDuration < swipeDurationThreshold)
+                        if (finalSwipeDirection.magnitude >= adaptiveMinSwipe ||
+                            swipeDuration < swipeDurationThreshold)
                         {
-                            lastSwipeTime = Time.time; // Start cooldown.
-                            swipeDetected = true; // Gyldigt swipe.
-                            fingerDown = false;// Nulstil flag med det samme.
+                            lastSwipeTime = Time.time;
+                            swipeDetected = true;
+                            fingerDown = false;
 
-                            // Haptisk feedback – giv en kort vibration.
                             Handheld.Vibrate();
 
-                            // Bestem swipe-retningen.
                             Vector2 direction = Vector2.zero;
+                            bool isValidSwipe = true;
+
                             if (Mathf.Abs(finalSwipeDirection.x) > Mathf.Abs(finalSwipeDirection.y))
                             {
-                                direction = finalSwipeDirection.x > 0 ? Vector2.right : Vector2.left;
-                                
+                                // Horizontal movement check
+                                if (finalSwipeDirection.x > 0)
+                                {
+                                    if (!canMoveRight) isValidSwipe = false;
+                                    direction = Vector2.right;
+                                }
+                                else
+                                {
+                                    if (!canMoveLeft) isValidSwipe = false;
+                                    direction = Vector2.left;
+                                }
+
+                                UpdateAnimatorBools(direction);
+                            }
+                            else
+                            {
                                
-
-                                animator.SetBool("Right", true); // push animation højer
-                                animator.SetBool("Up", false); // push animation up
-                                animator.SetBool("down", false); // push animation down
-                                animator.SetBool("left", false); // push animation venstre
-
+                                    // Vertical movement (add canMoveUp/canMoveDown if needed)
+                                direction = finalSwipeDirection.y > 0 ? Vector2.up: Vector2.down;
+                                if (direction == Vector2.up && !canMoveUp) isValidSwipe = false;
+                                if (direction == Vector2.down && !canMoveDown) isValidSwipe = false;   
+                                UpdateAnimatorBools(direction);
                             }
-                            else
+
+                            if (!isValidSwipe)
                             {
-                                direction = finalSwipeDirection.y > 0 ? Vector2.up : Vector2.down;
-
-                                animator.SetBool("Right", false);
-                                animator.SetBool("Up", true);
-                                animator.SetBool("down", false);
-                                animator.SetBool("left", false);
+                                animator.SetBool("IsMoving", false);
+                                return;
                             }
 
-                            // Hvis spilleren skubber, lås bevægelsen til den låste retning.
-                            if (isPushing && currentPushable != null)
-                            {
-                                
-                               movement = direction;
-                            }
-                            else
-                            {
-                                // Normal bevægelse, når man ikke skubber.
-                                movement = direction;
-                            }
-
-                            // Forsøg at beregne det næste grid-felt.
-                            TryMove(movement); // Skal sætte targetPosition og isMoving, hvis bevægelsen er gyldig.
-
-                            // Start glidende bevægelse, hvis en bevægelse er registreret.
-                            if (isMoving)
-                            {
-                                StartCoroutine(MoveToTarget(rb.position, targetPosition, 0.20f)); // Juster varigheden efter behov.
-                                animator.SetBool("IsMoving", true);
-                            }
+                            // Unified movement handling for both input methods
+                            HandleMovementInput(direction);
                         }
                     }
                     break;
@@ -686,7 +858,6 @@ public class PlayerControllerMobile : MonoBehaviour
                 case TouchPhase.Ended:
                 case TouchPhase.Canceled:
                     fingerDown = false;
-                    // Hvis der ikke blev registreret et gyldigt swipe, skal vi sikre, at vi går til idle.
                     if (!swipeDetected)
                     {
                         animator.SetBool("IsMoving", false);
@@ -696,10 +867,43 @@ public class PlayerControllerMobile : MonoBehaviour
         }
         else
         {
-            fingerDown = false;
+            // Handle keyboard/controller input
+            float moveInput = Input.GetAxis("Horizontal");
+            Vector2 keyboardDirection = Vector2.zero;
+
+            if (moveInput > 0 && canMoveRight)
+            {
+                keyboardDirection = Vector2.right;
+            }
+            else if (moveInput < 0 && canMoveLeft)
+            {
+                keyboardDirection = Vector2.left;
+            }
+
+            if (keyboardDirection != Vector2.zero)
+            {
+                HandleMovementInput(keyboardDirection);
+            }
+            else
+            {
+               // animator.SetBool("IsMoving", false);
+            }
         }
     }
-
+    private void HandleMovementInput(Vector2 direction)
+    { 
+        movement = direction;
+        if (isMoving)  // Now properly returns a boolean
+        {
+            StartCoroutine(MoveToTarget(rb.position, targetPosition, 0.20f));
+            animator.SetBool("IsMoving", true);
+        }
+        else
+        {
+            // Optional: Handle invalid movement
+            animator.SetBool("IsMoving", false);
+        }     
+    }
     // Coroutine til glidende bevægelse for spilleren.
     private IEnumerator MoveToTarget(Vector2 startPos, Vector2 targetPos, float duration)
     {
@@ -914,14 +1118,14 @@ public class PlayerControllerMobile : MonoBehaviour
         // Sæt det aktuelle objekt som det pushbare
         currentPushable = pushableObject;
         isPushing = true;
-
+        playerAnimation.GetComponent<PlayerAnimator>().directionLocked = true;
         // Find retningen fra spiller -> objekt => nærmeste kardinal
         Vector2 pushDir = (currentPushable.transform.position - transform.position).normalized;
         lockedPushDirection = GetCardinalDirection(pushDir);
         pushDirection = lockedPushDirection;
 
         Debug.Log($"Starter med at skubbe: {currentPushable.name}, Retning: {lockedPushDirection}");
-
+        
         // Highlight
         HighlightObject(currentPushable);
 
@@ -929,6 +1133,106 @@ public class PlayerControllerMobile : MonoBehaviour
         Flip(lockedPushDirection);
         RemoveFromBlockedCells(WorldToGridCoordinates(currentPushable.transform.position));
     }
+    void DisablelMovement()
+    {
+        /*
+       if(transform.rotation.z == 0)
+        {
+            canMoveUp = false;
+        }
+       else if (transform.rotation.z == -90)
+        {
+            canMoveRight = false; // kan ikke gå til højer vis sand.
+        }
+       else if(transform.rotation.z == -180)
+        {
+            canMoveDown = false;
+        }
+       else if (transform.rotation.z == 90)
+        {
+            canMoveLeft = false;
+        }
+        */
+    }
+    void DisablelMovementRight()
+    {
+        
+        
+            canMoveRight = false; // kan ikke gå til højer vis sand.
+        
+    }
+    void DisablelMovementleft()
+    {
+        
+        
+            canMoveLeft = false;
+        
+    }
+    void DisablelMovementUp()
+    {
+        
+            canMoveUp = false;
+     
+    }
+    void DisablelMovementDown()
+    {
+      
+     
+            canMoveDown = false;
+      
+    }
+    void EnableMovementRight()
+    {
+       
+      
+            canMoveRight = true; // kan ikke gå til højer vis sand.
+        
+    }
+    void EnableMovementUp()
+    {
+        
+        
+            canMoveUp = true;
+       
+    }
+    void EnableMovementLeft()
+    {
+       
+      
+            canMoveLeft = true;
+      
+    }
+    void EnableMovementDown()
+    {
+        
+      
+            canMoveDown = true;
+        
+    }
+    void EnableMovement()
+    {
+        /*
+        if (transform.rotation.z == 0)
+        {
+            canMoveUp = true;
+        }
+        else if (transform.rotation.z == -90)
+        {
+            canMoveRight = true; // kan ikke gå til højer vis sand.
+        }
+        else if (transform.rotation.z == -180)
+        {
+            canMoveDown = true;
+        }
+        else if (transform.rotation.z == 90)
+        {
+            canMoveLeft = true;
+        }
+        */
+    }
+    
+    
+
     private void StopPushingObject()
     {
         if (currentPushable != null)
@@ -944,8 +1248,9 @@ public class PlayerControllerMobile : MonoBehaviour
 
             Debug.Log($"Cell at {coords} updated for Pushable object: {currentPushable.name}");
         }
-
+       
         // Reset pushing state
+        playerAnimation.GetComponent<PlayerAnimator>().directionLocked = false;
         isPushing = false;
         currentPushable = null;
         pushDirection = Vector2.zero;
@@ -954,8 +1259,6 @@ public class PlayerControllerMobile : MonoBehaviour
         // Force dynamic blockers to update immediately
         UpdateDynamicBlockers();
     }
-
-
     private Vector2 GetCardinalDirection(Vector2 direction)
     {
         if (Mathf.Abs(direction.x) > Mathf.Abs(direction.y))
@@ -980,7 +1283,26 @@ public class PlayerControllerMobile : MonoBehaviour
         // Beregn vinkel og rotér spilleren
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f;
         transform.rotation = Quaternion.Euler(0f, 0f, angle);
-
+        if (Mathf.RoundToInt(transform.rotation.eulerAngles.z) == 0)
+        {
+            Debug.Log("ARRRRRRRR!!!!!!!");
+            playerAnimation.GetComponent<PlayerAnimator>().TurnBack();
+        }
+        else if (Mathf.RoundToInt(transform.rotation.eulerAngles.z) == 270)
+        {
+            Debug.Log("ARRRRRRRR!!!!!!!");
+            playerAnimation.GetComponent<PlayerAnimator>().TurnRight();
+        }
+        else if (Mathf.RoundToInt(transform.rotation.eulerAngles.z) == 90)
+        {
+            Debug.Log("ARRRRRRRR!!!!!!!");
+            playerAnimation.GetComponent<PlayerAnimator>().TurnLeft();
+        }
+        else if (Mathf.RoundToInt(transform.rotation.eulerAngles.z) == 180)
+        {
+            Debug.Log("ARRRRRRRR!!!!!!!");
+            playerAnimation.GetComponent<PlayerAnimator>().TurnFront();
+        }
         // Opdater pushPoint-position baseret på den nye retning
         UpdatePushPointPosition(direction);
     }

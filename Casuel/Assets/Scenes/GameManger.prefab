@@ -50,7 +50,23 @@ MonoBehaviour:
     CorrectString: x
   - slot2: {fileID: 0}
     CorrectString: x
+  - slot2: {fileID: 0}
+    CorrectString: x
+  - slot2: {fileID: 0}
+    CorrectString: x
+  - slot2: {fileID: 0}
+    CorrectString: x
+  - slot2: {fileID: 0}
+    CorrectString: x
   stringAnswersligemed:
+  - slot2: {fileID: 0}
+    CorrectString: x
+  - slot2: {fileID: 0}
+    CorrectString: x
+  - slot2: {fileID: 0}
+    CorrectString: x
+  - slot2: {fileID: 0}
+    CorrectString: x
   - slot2: {fileID: 0}
     CorrectString: x
   - slot2: {fileID: 0}
@@ -60,10 +76,32 @@ MonoBehaviour:
     correctAnswer: 3
   - slot: {fileID: 0}
     correctAnswer: 13
+  - slot: {fileID: 0}
+    correctAnswer: 3
+  - slot: {fileID: 0}
+    correctAnswer: 13
+  - slot: {fileID: 0}
+    correctAnswer: 3
+  - slot: {fileID: 0}
+    correctAnswer: 13
+  - slot: {fileID: 0}
+    correctAnswer: 16
   questionSlotPairs:
   - slot: {fileID: 0}
     correctAnswer: 3
   - slot: {fileID: 0}
     correctAnswer: 13
+  - slot: {fileID: 0}
+    correctAnswer: 3
+  - slot: {fileID: 0}
+    correctAnswer: 13
+  - slot: {fileID: 0}
+    correctAnswer: 3
+  - slot: {fileID: 0}
+    correctAnswer: 13
+  - slot: {fileID: 0}
+    correctAnswer: 16
   winMenu: {fileID: 0}
-  correctAnswerEffect: {fileID: 0}
+  correctAnswerPrefab: {fileID: 9157105887711914197, guid: c4f829cb7dd4b864caf8832ec5b1ee55, type: 3}
+  finalAllAnswersEffects:
+  - {fileID: 0}

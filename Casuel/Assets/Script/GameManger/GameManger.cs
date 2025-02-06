@@ -77,26 +77,27 @@ public class GameManager : MonoBehaviour
     private void ValidateAllAnswers()
     {
         bool allCorrect = true;
-
+        Debug.Log("den firste; " + allCorrect);
         // 1) Tjek stringAnswers -> med "forkert->rigtigt" logik + spawn-effekt
         allCorrect &= ValidateStringAnswers(stringAnswers);
-
+        Debug.Log(allCorrect);
         // 2) Tjek stringAnswersligemed -> ingen effekter
         if (!ValidateStringAnswersNoEffect(stringAnswersligemed))
             allCorrect = false;
-
+        Debug.Log(allCorrect);
         // 3) Tjek equalsSlotPairs -> ingen "enkelt"-effekt
         //    men du kan let tilføje samme logik, hvis du vil
         if (!ValidateNumberAnswersNoEffect(equalsSlotPairs))
             allCorrect = false;
-
+        Debug.Log(allCorrect);
         // 4) Tjek questionSlotPairs -> ingen effekter
         if (!ValidateNumberAnswersNoEffect(questionSlotPairs))
             allCorrect = false;
-
+        Debug.Log(allCorrect);
         // 5) Hvis alt korrekt -> final effekter
         if (allCorrect)
         {
+            Debug.Log("YAYAYYA");
             playerEnteredTemple = true;
             PlayFinalEffectsOnce();
         }
@@ -106,7 +107,7 @@ public class GameManager : MonoBehaviour
     private bool ValidateStringAnswers(StringAnswer[] answers)
     {
         bool localAll = true;
-
+        
         for (int i = 0; i < answers.Length; i++)
         {
             if (answers[i].slot2 == null)
@@ -137,9 +138,11 @@ public class GameManager : MonoBehaviour
 
             if (isCorrectNow)
             {
+                Debug.Log("Yayaya" + localAll);
                 // Tjek om den IKKE var korrekt før
                 if (!previouslyCorrectString[i])
                 {
+                    Debug.Log("Yayaya" + localAll);
                     // Spawn effekt (1 prefab) ved brikkens position
                     ShowCorrectAnswerEffect(placedObj.transform.position);
 
@@ -149,6 +152,7 @@ public class GameManager : MonoBehaviour
             }
             else
             {
+                Debug.Log("Yayaya" + localAll);
                 localAll = false;
                 previouslyCorrectString[i] = false;
             }
@@ -241,7 +245,7 @@ public class GameManager : MonoBehaviour
     {
         if (hasPlayedFinalEffects) return;
         hasPlayedFinalEffects = true;
-
+        Debug.Log("Yayaya" + hasPlayedFinalEffects);
         if (finalAllAnswersEffects == null) return;
 
         foreach (var fx in finalAllAnswersEffects)
@@ -312,7 +316,7 @@ public class GameManager : MonoBehaviour
 
     public void RestartLevel()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void NextLevel()

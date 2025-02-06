@@ -11,6 +11,8 @@ TagManager:
   - Sprite
   - Backgrund
   - FxTemporaire
+  - BlockEverything
+  - Wall
   layers:
   - Default
   - TransparentFX
