@@ -21,7 +21,7 @@ public class FancyCam : MonoBehaviour
         cam.Follow = brazier.transform;
         player.GetComponent<PlayerControllerMobile>().enabled = false;
         tempTimer = timer;
-        spawmPrev = true;
+        spamPrev = true;
     }
 
 
